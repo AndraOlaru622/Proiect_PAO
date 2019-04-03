@@ -1,20 +1,13 @@
 package classes;
 
-public class Locuinta {
-    private String adresa;
+public interface Locuinta {
 
-    public Locuinta(String adresa) {
-        this.adresa = adresa;
-    }
+    void afisare();
+    void afisare_adresa();
+    void afisare_tip_pret();
+    void modificare_pret(double x);
+    double getPret();
+    void new_locuinta();
 
-    public Locuinta() {
-    }
 
-    public String getAdresa() {
-        return adresa;
-    }
-
-    public void setAdresa(String adresa) {
-        this.adresa = adresa;
-    }
 }

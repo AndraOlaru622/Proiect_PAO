@@ -1,21 +1,25 @@
 package classes;
 
-public class Apartament extends Cladire {
+import java.util.Scanner;
+
+public class Apartament implements Locuinta {
     private int etaj;
     private int numar;
     private double pret;
     private double suprafata;
     private int nr_camere;
+    private String adresa;
 
     public Apartament() {}
 
-    public Apartament(int nr_ap_disponibile, int nr_etaje, String adresa, int etaj, int numar, double pret, double suprafata, int nr_camere) {
-        super(nr_ap_disponibile, nr_etaje, adresa);
+    public Apartament( String adresa, int etaj, int numar, double pret, double suprafata, int nr_camere) {
+        this.adresa=adresa;
         this.etaj = etaj;
         this.numar = numar;
         this.pret = pret;
         this.suprafata = suprafata;
         this.nr_camere = nr_camere;
+
     }
 
     public int getEtaj() {
@@ -56,5 +60,69 @@ public class Apartament extends Cladire {
 
     public void setNr_camere(int nr_camere) {
         this.nr_camere = nr_camere;
+    }
+
+
+
+    @Override
+    public void afisare() {
+      System.out.print("Tip locuinta: Apartament");
+      System.out.print(" Pret: "+this.pret);
+      System.out.print(" Suprafata: "+this.suprafata);
+      this.afisare_adresa();
+
+
+    }
+
+    @Override
+    public void new_locuinta(){
+        Scanner sc=new Scanner(System.in);
+        double pret_l,suprafata_l;
+        int et,nr,nrc;
+        String adresa_l;
+        System.out.print("Suprafata: ");
+        suprafata_l=sc.nextDouble();
+        System.out.print("Numar camere: ");
+        nrc=sc.nextInt();
+        System.out.print("Pret: ");
+        pret_l=sc.nextDouble();
+        System.out.print("Etaj: ");
+        et=sc.nextInt();
+        System.out.print("Numar: ");
+        nr=sc.nextInt();
+        System.out.print("Adresa: ");
+        String sp=sc.next();
+        adresa_l=sc.nextLine();
+        this.setAdresa(adresa_l);
+        this.setEtaj(et);
+        this.setNr_camere(nrc);
+        this.setNumar(nr);
+        this.setPret(pret_l);
+        this.setSuprafata(suprafata_l);}
+
+    @Override
+    public void afisare_adresa() {
+        System.out.println(" Adresa: "+adresa+" Etaj: "+this.etaj+" Numar: "+this.numar);
+    }
+
+    @Override
+    public void modificare_pret(double x){
+        this.pret=x;
+        System.out.println("Pretul a fost modificat.");
+
+    }
+
+    @Override
+    public void afisare_tip_pret(){
+        System.out.print("Tip: Casa Pret: "+pret);
+    }
+
+
+    public String getAdresa() {
+        return adresa;
+    }
+
+    public void setAdresa(String adresa) {
+        this.adresa = adresa;
     }
 }

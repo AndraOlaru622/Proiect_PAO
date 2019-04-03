@@ -1,37 +1,26 @@
 package classes;
 
-public class Client {
-    private String nume;
-    private String prenume;
+public class Client extends Persoana {
+
     private Agent a1;
     private Achizitie ac1;
     private Locuinta loc;
 
-    public Client() {}
+
 
     public Client(String nume, String prenume, Agent a1, Achizitie ac1, Locuinta loc) {
-        this.nume = nume;
-        this.prenume = prenume;
+       super(nume, prenume);
         this.a1 = a1;
         this.ac1 = ac1;
         this.loc = loc;
     }
 
-    public String getNume() {
-        return nume;
+
+    public Client(){
+        super();
     }
 
-    public void setNume(String nume) {
-        this.nume = nume;
-    }
 
-    public String getPrenume() {
-        return prenume;
-    }
-
-    public void setPrenume(String prenume) {
-        this.prenume = prenume;
-    }
 
     public Agent getA1() {
         return a1;

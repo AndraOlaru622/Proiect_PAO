@@ -27,4 +27,8 @@ public class Inchiriere implements Achizitie {
     public void setRata(double rata) {
         this.rata = rata;
     }
+
+    public void afisare(){
+        System.out.print("Numar luni inchiriere: "+nr_luni+" Rata: "+rata);
+    }
 }

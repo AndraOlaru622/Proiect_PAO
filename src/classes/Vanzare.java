@@ -17,4 +17,8 @@ public class Vanzare implements Achizitie{
     public void setPret(double pret) {
         this.pret = pret;
     }
+
+    public void afisare(){
+        System.out.print(" Pret: "+pret);
+    }
 }

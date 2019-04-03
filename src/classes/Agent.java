@@ -1,47 +1,58 @@
 package classes;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-public class Agent {
-private String nume;
-private String prenume;
-private Locuinta []locuinte;
-private double total_vanzari;
-private List<Client> clienti;
+public class Agent extends Persoana {
 
-public Agent(){}
 
-    public String getNume() {
-        return nume;
+    private HashMap<java.lang.Integer,Client> clienti;
+    private HashMap<java.lang.Integer,Achizitie> vanzari;
+    private double suma_totala_vanzari=0;
+
+    public Agent(String nume, String prenume, HashMap<java.lang.Integer, Client> clienti, HashMap<java.lang.Integer, Achizitie> vanzari, double suma_totala_vanzari) {
+        super(nume, prenume);
+        this.clienti = clienti;
+        this.vanzari = vanzari;
+        this.suma_totala_vanzari = suma_totala_vanzari;
+    }
+    public Agent(String nume, String prenume){
+        super(nume, prenume);
+        this.suma_totala_vanzari=0;
+        clienti=new HashMap<>();
+        vanzari=new HashMap<>();
     }
 
-    public void setNume(String nume) {
-        this.nume = nume;
+    public void afisare(){
+        System.out.print("Nume agent: ");
+        System.out.print(getNume());
+        System.out.print(" Prenume agent: ");
+        System.out.print(getPrenume());
     }
 
-    public String getPrenume() {
-        return prenume;
+
+    public HashMap<Integer, Client> getClienti() {
+        return clienti;
     }
 
-    public void setPrenume(String prenume) {
-        this.prenume = prenume;
+    public void setClienti(HashMap<Integer, Client> clienti) {
+        this.clienti = clienti;
     }
 
-    public Locuinta[] getLocuinte() {
-        return locuinte;
+    public HashMap<Integer, Achizitie> getVanzari() {
+        return vanzari;
     }
 
-    public void setLocuinte(Locuinta[] locuinte) {
-        this.locuinte = locuinte;
+    public void setVanzari(HashMap<Integer, Achizitie> vanzari) {
+        this.vanzari = vanzari;
     }
 
-    public double getTotal_vanzari() {
-        return total_vanzari;
+    public double getSuma_totala_vanzari() {
+        return suma_totala_vanzari;
     }
 
-    public void setTotal_vanzari(double total_vanzari) {
-        this.total_vanzari = total_vanzari;
+    public void setSuma_totala_vanzari(double suma_totala_vanzari) {
+        this.suma_totala_vanzari = suma_totala_vanzari;
     }
-
 }

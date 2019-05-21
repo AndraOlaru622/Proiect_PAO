@@ -12,6 +12,8 @@ public class Apartament implements Locuinta {
 
     public Apartament() {}
 
+
+
     public Apartament( String adresa, int etaj, int numar, double pret, double suprafata, int nr_camere) {
         this.adresa=adresa;
         this.etaj = etaj;
@@ -21,6 +23,8 @@ public class Apartament implements Locuinta {
         this.nr_camere = nr_camere;
 
     }
+
+
 
     public int getEtaj() {
         return etaj;
@@ -118,11 +122,13 @@ public class Apartament implements Locuinta {
     }
 
 
-    public String getAdresa() {
+    public String get_Adresa() {
         return adresa;
     }
 
     public void setAdresa(String adresa) {
         this.adresa = adresa;
     }
+
+    public String get_Type(){ return "Apartament";}
 }

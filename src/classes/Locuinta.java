@@ -8,6 +8,8 @@ public interface Locuinta {
     void modificare_pret(double x);
     double getPret();
     void new_locuinta();
+    String get_Adresa();
+    String get_Type();
 
 
 }

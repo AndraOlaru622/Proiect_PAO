@@ -3,6 +3,12 @@ package classes;
 public class Vanzare implements Achizitie{
     private double pret;
 
+    public String get_type(){
+        return "Vanzare";
+    }
+
+
+
     public Vanzare() {
     }
 

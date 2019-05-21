@@ -2,6 +2,9 @@ package classes;
 
 import sort.Sort_Agenti;
 
+import java.security.Timestamp;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.*;
 
 public class Service {
@@ -9,24 +12,43 @@ public class Service {
   private List<Client> clienti;
   private List<Agent> agenti;
   private List<Locuinta> locuinte_disponibile;
-
   private ArrayList<Agent> agenti_ranking;
   private HashMap<java.lang.Integer,Locuinta>locuinte_vandute;
-  HashMap<java.lang.Integer,Achizitie>achizitii_realizate;
+  private HashMap<java.lang.Integer,Achizitie>achizitii_realizate;
+  private Connection conn;
 
-    public Service() {
+
+    public Service(){
         this.nr_locuinte_vandute = 0;
         clienti = new ArrayList<>();
         agenti=new ArrayList<>();
         locuinte_disponibile=new ArrayList<>();
         locuinte_vandute=new HashMap<>();
         achizitii_realizate=new HashMap<>();
-
+    }
+    public Service(Connection c) {
+        this.nr_locuinte_vandute = 0;
+        clienti = new ArrayList<>();
+        agenti=new ArrayList<>();
+        locuinte_disponibile=new ArrayList<>();
+        locuinte_vandute=new HashMap<>();
+        achizitii_realizate=new HashMap<>();
+        this.conn=c;
 
         };
 
 
 
+    public List<String> add_action_date_to_csv(String action){
+
+        Date date=new Date();
+        long time=date.getTime();
+
+        List<String>action_date=new ArrayList<>();
+        action_date.add(action);
+        action_date.add(Long.toString(time));
+        return action_date;
+    }
 
   public void show_clienti(){
       //Nume client+Tip achizitie
@@ -57,8 +79,10 @@ public class Service {
 
   public void add_locuinta(Locuinta x){locuinte_disponibile.add(x);}
 
-  public void add_tranzactie(){
+  public void add_tranzactie()throws SQLException {
       //Client
+      DB_Alter d=new DB_Alter(this.conn);
+
       Client new_client=new Client();
       Scanner sc=new Scanner(System.in);
       System.out.print("Nume client: ");
@@ -89,6 +113,9 @@ public class Service {
       int i1=indice_locuinta-1;
       System.out.println(i1);
       locuinte_disponibile.get(i1).afisare();
+      d.Alter_Agent(indice_agent,locuinte_disponibile.get(i1).getPret());
+      DB_Delete del=new DB_Delete(conn);
+      del.Delete_Locuinta(locuinte_disponibile.get(i1));
       //new_client.setLoc(locuinte_disponibile.get(i1));
 
       //Alegere tip tranzactie
@@ -113,6 +140,9 @@ public class Service {
               agenti.get(ind_ag).setSuma_totala_vanzari(agenti.get(ind_ag).getSuma_totala_vanzari()+locuinte_disponibile.get(i1).getPret());
               //Stergere din locuinta disponibile
               locuinte_disponibile.remove(locuinte_disponibile.get(i1));
+               new_client.setAc1(v);
+               agenti.get(ind_ag).addVanzare(v);
+               agenti.get(ind_ag).addClient(new_client);
 
 
           ok=1;    }
@@ -128,6 +158,7 @@ public class Service {
               locuinte_vandute.put(nr_locuinte_vandute,locuinte_disponibile.get(i1));
               agenti.get(ind_ag).setSuma_totala_vanzari(agenti.get(ind_ag).getSuma_totala_vanzari()+locuinte_disponibile.get(i1).getPret());
               locuinte_disponibile.remove(locuinte_disponibile.get(i1));
+              new_client.setAc1(i);
           ok=1;}
           else {
               System.out.println("Introduceti indice valid.");
@@ -165,7 +196,7 @@ public class Service {
           achizitii_realizate.get(i+1).afisare();
           System.out.println();
       }
-      };
+      }
 
   public void show_locuinte_interval(double i1,double i2){
       int nr_locuinte=0;
@@ -183,6 +214,10 @@ public class Service {
   }
 
   public void show_meniu(){
+
+
+
+
       System.out.println("Meniu:");
       System.out.println("1.  Afisare locuinte disponibile");
       System.out.println("2.  Afisare clienti");
@@ -201,7 +236,7 @@ public class Service {
 
 
 
-    public void modificare_pret_locuinta()
+    public void modificare_pret_locuinta() throws SQLException
     {  Scanner sc=new Scanner(System.in);
         this.show_locuinte_disponibile();
         int indice;
@@ -211,6 +246,8 @@ public class Service {
         double pret_nou;
         pret_nou=sc.nextDouble();
         this.locuinte_disponibile.get(indice-1).modificare_pret(pret_nou);
+        DB_Alter d=new DB_Alter(this.conn);
+        d.Alter_Locuinta(this.locuinte_disponibile.get(indice-1),pret_nou);
 
     }
 
@@ -263,4 +300,12 @@ public class Service {
     public void setAchizitii_realizate(HashMap<Integer, Achizitie> achizitii_realizate) {
         this.achizitii_realizate = achizitii_realizate;
     }
+
+
+
+
+
+
+
+
 }

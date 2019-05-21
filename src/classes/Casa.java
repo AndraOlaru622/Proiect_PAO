@@ -29,6 +29,9 @@ public class Casa implements Locuinta {
         return pret;
     }
 
+    public String get_Type(){ return "Casa";}
+
+
     public void setPret(double pret) {
         this.pret = pret;
     }
@@ -41,7 +44,7 @@ public class Casa implements Locuinta {
         this.suprafata = suprafata;
     }
 
-    public String getAdresa() {
+    public String get_Adresa() {
         return adresa;
     }
 

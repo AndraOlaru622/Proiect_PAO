@@ -1,7 +1,8 @@
 package classes;
 
 public interface Achizitie {
-      public void afisare();
-
+      void afisare();
+      String get_type();
+      double getPret();
 
 }

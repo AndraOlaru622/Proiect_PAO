@@ -4,8 +4,16 @@ public class Inchiriere implements Achizitie {
     private int nr_luni;
     private double rata;
 
+    public String get_type(){
+        return "Inchiriere";
+    }
+
+
+
     public Inchiriere() {
     }
+
+    public double getPret(){return nr_luni*rata;}
 
     public Inchiriere(int nr_luni, double rata) {
         this.nr_luni = nr_luni;

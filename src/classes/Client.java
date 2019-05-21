@@ -20,6 +20,10 @@ public class Client extends Persoana {
         super();
     }
 
+    public Client(String nume,String prenume){
+        super(nume,prenume);
+    }
+
 
 
     public Agent getA1() {
